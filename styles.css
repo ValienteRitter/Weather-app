@@ -42,6 +42,13 @@ header {
 header > div {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+header > div > button {
+    height: 2rem;
+    width: 5rem;
 }
 
 header > img {
@@ -53,3 +60,29 @@ header > img {
     flex-direction: column;
 }
 
+.unit-dropdown {
+    background-color: var(--Neutral-800);
+    padding: 0.5rem;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    position: absolute;
+    top: 4rem;
+    width: 14rem;
+}
+
+.unit-dropdown > .group > button {
+    border: none;
+    background-color: var(--Neutral-800);
+    color: var(--Neutral-0);
+    padding: 0.5rem;
+    text-align: left;
+    border-radius: 10px;
+}
+
+.unit-dropdown > .group > button:hover {
+    background-color: var(--Neutral-700);
+}
+
+.hidden {
+    display: none;
+}
