@@ -86,3 +86,68 @@ header > img {
 .hidden {
     display: none;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search {
+    padding: 1rem;
+}
+
+.search > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@media(min-width: 500px) {
+    .search > form {
+        flex-direction: row;
+    }
+}
+
+.search > h1 {
+    font-size: 4rem;
+    text-align: center;
+}
+
+.search > form > input {
+    width: 100%;
+    height: 3rem;
+    border-radius: 10px;
+    border: none;
+    color: var(--Neutral-0);
+    background-color: var(--Neutral-800);
+    padding: 1rem;
+}
+
+
+.search > form > button {
+    color: var(--Neutral-0);
+    background-color: var(--Blue-500);
+    border: none;
+    border-radius: 10px;
+    height: 3rem;
+    width: 100%;
+    font-size: 15px;
+}
+
+@media(min-width: 500px) {
+    .search > form > input {
+        width: 75%;
+        height: 2rem;
+    }
+}
+
+@media(min-width: 500px) {
+    .search > form > button {
+        width: 4rem;
+        height: 2rem;
+    }
+}
