@@ -151,3 +151,26 @@ main {
         height: 2rem;
     }
 }
+
+.current-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+.current-grid > div {
+    padding: 15px;
+    border-radius: 15px;
+    background-color: var(--Neutral-800);
+}
+
+.temperature {
+    grid-column: 1 / 3;
+    background-image: url(assets/images/bg-today-small.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 286px;
+    width: 343px;
+}
