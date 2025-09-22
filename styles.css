@@ -199,3 +199,23 @@ main {
         width: 100%;
     }
 }
+
+.daily-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 1rem;
+}
+
+.daily-grid > div {
+    padding: 15px;
+    border-radius: 15px;
+    background-color: var(--Neutral-800);
+}
+
+@media(min-width: 500px) {
+    .daily-grid {
+        display: flex;
+        flex-direction: row;
+    }
+}
