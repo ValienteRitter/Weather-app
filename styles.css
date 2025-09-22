@@ -33,10 +33,13 @@ html, body {
     width: 100%;
 }
 
+.app-container {
+    padding: 1rem 2rem;
+}
+
 header {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 2rem;
 }
 
 header > div {
@@ -160,16 +163,16 @@ main {
     grid-template-areas: 
                         'temperature temperature'
                         'feels-like humidity'
-                        'wind precitipation';
+                        'wind precipitation';
 }
 
 @media(min-width: 500px) {
     .current-grid {
         grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: 2fr;
+        grid-template-rows: auto auto;
         grid-template-areas: 
                         'temperature temperature temperature temperature'
-                        'feels-like humidity wind precitipation';
+                        'feels-like humidity wind precipitation';
     }
 }
 
@@ -187,12 +190,12 @@ main {
     background-position: center;
     background-size: cover;
     height: 286px;
-    width: 343px;
+    width: 100%;
 }
 
 @media(min-width: 500px) {
     .temperature {
         background-image: url(assets/images/bg-today-large.svg);
-        width: 800px;
+        width: 100%;
     }
 }
