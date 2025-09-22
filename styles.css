@@ -97,6 +97,21 @@ main {
     align-items: center;
 }
 
+.result {
+    width: 100%;
+}
+
+@media(min-width:500px) {
+    .result {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-areas: 
+                            'current hourly'
+                            'daily hourly';
+        gap: 1rem;
+    }
+}
+
 .search {
     padding: 1rem;
 }
@@ -218,4 +233,32 @@ main {
         display: flex;
         flex-direction: row;
     }
+}
+
+.hourly {
+    background-color: var(--Neutral-800);
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+.hourly-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.hourly-grid > div {
+    padding: 15px;
+    border-radius: 15px;
+    background-color: var(--Neutral-700);
+}
+
+@media(min-width: 500px) {
+    .hourly {
+        grid-area: hourly;
+    }
+}
+
+.hidden {
+    display: none;
 }
