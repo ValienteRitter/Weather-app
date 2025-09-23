@@ -258,7 +258,3 @@ main {
         grid-area: hourly;
     }
 }
-
-.hidden {
-    display: none;
-}
