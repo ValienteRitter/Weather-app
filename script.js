@@ -49,7 +49,25 @@ function createDailyDiv(day, maxTemp, minTemp) {
     return div
 }
 
-
+async function buildDailyDiv() {
+    dailyGrid.replaceChildren()
+    
+    const data = await getWeatherData()
+    const maxTemps = data.daily.temperature_2m_max
+    const minTemps = data.daily.temperature_2m_min
+    const times = data.daily.time
+    
+    for(let i = 0; i < 7; i++) {
+        const div = createDailyDiv(
+            getDayOfWeek(times[i]),
+            maxTemps[i],
+            minTemps[i]
+        )
+        
+        dailyGrid.appendChild(div)
+    }
+    
+}
 
 function getDayOfWeek(date) {
     const dayOfWeek = new Date(date).getDay()
