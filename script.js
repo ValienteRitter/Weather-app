@@ -28,7 +28,14 @@ async function getWeatherData() {
     }
 }
 
+
+function getDayOfWeek(date) {
+    const dayOfWeek = new Date(date).getDay()
+    return isNaN(dayOfWeek) ? null : ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'][dayOfWeek]
+}
+
 searchButton.addEventListener('click', () => getGeoData().then(result => console.log(result)))
 searchButton.addEventListener('click', () => getWeatherData().then(result => console.log(result)))
+searchButton.addEventListener('click', () => buildDailyDiv())
 
 
