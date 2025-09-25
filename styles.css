@@ -223,9 +223,22 @@ main {
 }
 
 .daily-grid > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 6rem;
     padding: 15px;
     border-radius: 15px;
     background-color: var(--Neutral-800);
+}
+
+.daily-grid > div > div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+
 }
 
 @media(min-width: 500px) {
