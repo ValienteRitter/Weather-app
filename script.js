@@ -1,5 +1,8 @@
 const searchButton = document.querySelector('.search-btn')
 const userLocationInput = document.querySelector('input')
+const currentGrid = document.querySelector('.current-grid')
+const dailyGrid = document.querySelector('.daily-grid')
+const hourlyGrid = document.querySelector('.hourly-grid')
 
 async function getGeoData() {
     const userLocation =userLocationInput.value
@@ -28,10 +31,29 @@ async function getWeatherData() {
     }
 }
 
+function createDailyDiv(day, maxTemp, minTemp) {
+
+    const div = document.createElement('div')
+    const weekDayP = document.createElement('p')
+    const temperatureDiv = document.createElement('div')
+    const maxTempParagraph = document.createElement('p')
+    const minTempParagraph = document.createElement('p')
+    
+    weekDayP.textContent = day
+    maxTempParagraph.textContent = maxTemp.toFixed(0) + '\u00B0'
+    minTempParagraph.textContent = minTemp.toFixed(0) + '\u00B0'
+    
+    temperatureDiv.append(maxTempParagraph, minTempParagraph)
+    div.append(weekDayP, temperatureDiv)
+
+    return div
+}
+
+
 
 function getDayOfWeek(date) {
     const dayOfWeek = new Date(date).getDay()
-    return isNaN(dayOfWeek) ? null : ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'][dayOfWeek]
+    return isNaN(dayOfWeek) ? null : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][dayOfWeek]
 }
 
 searchButton.addEventListener('click', () => getGeoData().then(result => console.log(result)))
