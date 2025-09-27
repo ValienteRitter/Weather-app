@@ -220,6 +220,7 @@ main {
     gap: 1rem;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 1rem;
+    align-items: center;
 }
 
 .daily-grid > div {
@@ -258,16 +259,25 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    /* flex-wrap: wrap; */
+    
 }
 
 .hourly-grid > div {
     padding: 15px;
     border-radius: 15px;
     background-color: var(--Neutral-700);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 @media(min-width: 500px) {
     .hourly {
         grid-area: hourly;
+        overflow-x: scroll;
+        height: 41rem;
     }
 }
+
+
