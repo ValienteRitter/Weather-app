@@ -74,6 +74,27 @@ function getDayOfWeek(date) {
     return isNaN(dayOfWeek) ? null : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][dayOfWeek]
 }
 
+function getHoursOfWeekday(dates) {
+    const regex = /(\d{4}-\d{2}-\d{2})T(.+)/
+    const dateMap = new Map()
+    dates.forEach(date => {
+        const match = date.match(regex)
+        const dateStr = match[1]
+        const weekDay = getDayOfWeek(dateStr)
+        const hourStr = match[2]
+        if(!dateMap.has(dateStr)) {
+            dateMap.set(dateStr, [hourStr])
+        }
+        else {
+            dateMap.get(dateStr).push(hourStr)
+        }
+        
+    })
+    return dateMap
+}
+
+console.log(getHoursOfWeekday(['2025-09-29T21:00', '2025-09-29T22:00', '2025-09-29T23:00', '2025-09-30T00:00']))
+
 searchButton.addEventListener('click', () => getGeoData().then(result => console.log(result)))
 searchButton.addEventListener('click', () => getWeatherData().then(result => console.log(result)))
 searchButton.addEventListener('click', () => buildDailyDiv())
