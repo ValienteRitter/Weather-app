@@ -117,6 +117,30 @@ async function setHourlyTemps(weekDay) {
     return hourlyTempMap
 }
 
+function createHourlyDiv(hour, temp) {
+    const div = document.createElement('div')
+    const hourP = document.createElement('p');
+    const tempP = document.createElement('p');
+
+    hourP.textContent = hour
+    tempP.textContent = temp
+
+    div.append(hourP, tempP)
+
+    return div
+}
+
+async function buildHourlyDiv() {
+    hourlyGrid.replaceChildren()
+
+    const hourMap = await setHourlyTemps('Sun')
+
+    hourMap.forEach((temp, hour) => {
+        const hourlyDiv = createHourlyDiv(hour, temp)
+        hourlyGrid.appendChild(hourlyDiv)
+    })
+}
+
 
 async function somethinng() {
     const data = await getWeatherData()
@@ -130,6 +154,7 @@ console.log(getHoursOfWeekday(['2025-09-29T21:00', '2025-09-29T22:00', '2025-09-
 searchButton.addEventListener('click', () => getGeoData().then(result => console.log(result)))
 searchButton.addEventListener('click', () => getWeatherData().then(result => console.log(result)))
 searchButton.addEventListener('click', () => buildDailyDiv())
+searchButton.addEventListener('click', () => buildHourlyDiv())
 searchButton.addEventListener('click', () => somethinng().then(result => console.log(result)))
 searchButton.addEventListener('click', () => setHourlyTemps('Sun').then(result => console.log(result)))
 
