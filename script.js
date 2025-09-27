@@ -93,10 +93,44 @@ function getHoursOfWeekday(dates) {
     return dateMap
 }
 
+async function setHourlyTemps(weekDay) {
+    const data = await getWeatherData()
+    const temps = data.hourly.temperature_2m
+    const dates = data.hourly.time
+    const hourMap = getHoursOfWeekday(dates)
+    const hourlyTempMap = new Map()
+    let index = 0
+
+    hourMap.forEach((hours, date) => {
+        if(getDayOfWeek(date) === weekDay) {
+            hours.forEach(hour => {
+                hourlyTempMap.set(hour, temps[index])
+                index++
+                console.log(index, date);
+            }
+            )
+        } else {
+            console.log(index, date);
+            index += hours.length
+        }
+    })
+    return hourlyTempMap
+}
+
+
+async function somethinng() {
+    const data = await getWeatherData()
+    const timeArr = data.hourly.time
+
+    return getHoursOfWeekday(timeArr)
+}
+
 console.log(getHoursOfWeekday(['2025-09-29T21:00', '2025-09-29T22:00', '2025-09-29T23:00', '2025-09-30T00:00']))
 
 searchButton.addEventListener('click', () => getGeoData().then(result => console.log(result)))
 searchButton.addEventListener('click', () => getWeatherData().then(result => console.log(result)))
 searchButton.addEventListener('click', () => buildDailyDiv())
+searchButton.addEventListener('click', () => somethinng().then(result => console.log(result)))
+searchButton.addEventListener('click', () => setHourlyTemps('Sun').then(result => console.log(result)))
 
 
