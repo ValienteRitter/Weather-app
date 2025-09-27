@@ -123,7 +123,7 @@ function createHourlyDiv(hour, temp) {
     const tempP = document.createElement('p');
 
     hourP.textContent = hour
-    tempP.textContent = temp
+    tempP.textContent = temp.toFixed(0) + '\u00B0'
 
     div.append(hourP, tempP)
 
