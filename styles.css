@@ -260,8 +260,8 @@ main {
 
 @media(min-width: 500px) {
     .daily-grid {
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
     }
 }
 
