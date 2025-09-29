@@ -106,11 +106,9 @@ async function setHourlyTemps(weekDay) {
             hours.forEach(hour => {
                 hourlyTempMap.set(hour, temps[index])
                 index++
-                console.log(index, date);
             }
             )
         } else {
-            console.log(index, date);
             index += hours.length
         }
     })
@@ -141,21 +139,59 @@ async function buildHourlyDiv() {
     })
 }
 
+function createCurrentDiv(temp, location, date, feelsLike, humidity, wind, precipitation) {
+    const temperatureContainerDiv = document.createElement('div');
+    const temperatureValueDiv = document.createElement('div');
+    const locationDateDiv = document.createElement('div');
+    const temperatureP = document.createElement('p');
+    const locationP = document.createElement('p');
+    const dateP = document.createElement('p');
 
-async function somethinng() {
-    const data = await getWeatherData()
-    const timeArr = data.hourly.time
+    temperatureContainerDiv.classList.add('temperature')
 
-    return getHoursOfWeekday(timeArr)
+    temperatureP.textContent = temp
+    locationP.textContent = location
+    dateP.textContent = date
+
+    locationDateDiv.append(locationP, dateP)
+    temperatureValueDiv.append(locationDateDiv, temperatureP)
+    temperatureContainerDiv.append(temperatureValueDiv)
+
+    const feelsLikeContainer = document.createElement('div');
+    const humidityContainer = document.createElement('div');
+    const windContainer = document.createElement('div');
+    const precipitationContainer = document.createElement('div');
+
+    feelsLikeContainer.classList.add('feels-like')
+    humidityContainer.classList.add('humidity')
+    windContainer.classList.add('wind')
+    precipitationContainer.classList.add('precipitation')
+
+    const feelsLikeP = document.createElement('p');
+    const humidityP = document.createElement('p');
+    const windP = document.createElement('p');
+    const precipitationP = document.createElement('p');
+
+    feelsLikeP.textContent = feelsLike
+    humidityP.textContent = humidity
+    windP.textContent = wind
+    precipitationP.textContent = precipitation
+
+    feelsLikeContainer.appendChild(feelsLikeP)
+    humidityContainer.appendChild(humidityP)
+    windContainer.appendChild(windP)
+    precipitationContainer.appendChild(precipitationP)
+
+    const values = [temperatureContainerDiv, feelsLikeContainer, humidityContainer, windContainer, precipitationContainer]
+
+    return values
 }
 
-console.log(getHoursOfWeekday(['2025-09-29T21:00', '2025-09-29T22:00', '2025-09-29T23:00', '2025-09-30T00:00']))
 
 searchButton.addEventListener('click', () => getGeoData().then(result => console.log(result)))
 searchButton.addEventListener('click', () => getWeatherData().then(result => console.log(result)))
 searchButton.addEventListener('click', () => buildDailyDiv())
 searchButton.addEventListener('click', () => buildHourlyDiv())
-searchButton.addEventListener('click', () => somethinng().then(result => console.log(result)))
 searchButton.addEventListener('click', () => setHourlyTemps('Sun').then(result => console.log(result)))
 
 
