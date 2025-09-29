@@ -147,15 +147,24 @@ function createCurrentDiv({temperature_2m, time, apparent_temperature, relative_
     const locationP = document.createElement('p');
     const dateP = document.createElement('p');
 
+    const regex = /(\d{4}-\d{2}-\d{2})T(.+)/
+    const date = new Date(time.match(regex)[1])
+    const formattedDate = date.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month:"long",
+        day: "numeric",
+    })
+
     temperatureContainerDiv.classList.add('temperature')
 
-    temperatureP.textContent = temperature_2m
+    temperatureP.textContent = temperature_2m.toFixed(0) + '\u00B0'
     locationP.textContent = location
-    dateP.textContent = time
+    dateP.textContent = formattedDate
 
     locationDateDiv.append(locationP, dateP)
-    temperatureValueDiv.append(locationDateDiv, temperatureP)
-    temperatureContainerDiv.append(temperatureValueDiv)
+    temperatureValueDiv.append(locationDateDiv)
+    temperatureContainerDiv.append(temperatureValueDiv, temperatureP)
 
     const feelsLikeContainer = document.createElement('div');
     const humidityContainer = document.createElement('div');
