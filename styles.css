@@ -206,12 +206,28 @@ main {
     background-size: cover;
     height: 286px;
     width: 100%;
+
+}
+
+.temperature > p {
+    font-size: 4.5rem;
+}
+
+.temperature > div > div > p:first-of-type {
+    font-size: xx-large;
+    margin: 0;
+}
+.temperature > div > div > p:nth-of-type(2) {
+    color: var(--Neutral-300);
 }
 
 @media(min-width: 500px) {
     .temperature {
         background-image: url(assets/images/bg-today-large.svg);
         width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 }
 
