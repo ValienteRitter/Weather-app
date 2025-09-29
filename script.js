@@ -139,7 +139,7 @@ async function buildHourlyDiv() {
     })
 }
 
-function createCurrentDiv(temp, location, date, feelsLike, humidity, wind, precipitation) {
+function createCurrentDiv({temperature_2m, time, apparent_temperature, relative_humidity_2m, wind_speed_10m, precipitation}, location) {
     const temperatureContainerDiv = document.createElement('div');
     const temperatureValueDiv = document.createElement('div');
     const locationDateDiv = document.createElement('div');
@@ -149,9 +149,9 @@ function createCurrentDiv(temp, location, date, feelsLike, humidity, wind, preci
 
     temperatureContainerDiv.classList.add('temperature')
 
-    temperatureP.textContent = temp
+    temperatureP.textContent = temperature_2m
     locationP.textContent = location
-    dateP.textContent = date
+    dateP.textContent = time
 
     locationDateDiv.append(locationP, dateP)
     temperatureValueDiv.append(locationDateDiv, temperatureP)
@@ -161,6 +161,11 @@ function createCurrentDiv(temp, location, date, feelsLike, humidity, wind, preci
     const humidityContainer = document.createElement('div');
     const windContainer = document.createElement('div');
     const precipitationContainer = document.createElement('div');
+
+    feelsLikeContainer.textContent = 'Feels Like'
+    humidityContainer.textContent = 'Humidity'
+    windContainer.textContent = 'Wind'
+    precipitationContainer.textContent = 'Precipitation'
 
     feelsLikeContainer.classList.add('feels-like')
     humidityContainer.classList.add('humidity')
@@ -172,9 +177,9 @@ function createCurrentDiv(temp, location, date, feelsLike, humidity, wind, preci
     const windP = document.createElement('p');
     const precipitationP = document.createElement('p');
 
-    feelsLikeP.textContent = feelsLike
-    humidityP.textContent = humidity
-    windP.textContent = wind
+    feelsLikeP.textContent = apparent_temperature.toFixed(0) + '\u00B0'
+    humidityP.textContent = relative_humidity_2m.toFixed(0) + '%'
+    windP.textContent = wind_speed_10m
     precipitationP.textContent = precipitation
 
     feelsLikeContainer.appendChild(feelsLikeP)
@@ -182,16 +187,24 @@ function createCurrentDiv(temp, location, date, feelsLike, humidity, wind, preci
     windContainer.appendChild(windP)
     precipitationContainer.appendChild(precipitationP)
 
-    const values = [temperatureContainerDiv, feelsLikeContainer, humidityContainer, windContainer, precipitationContainer]
+    const valueContainers = [temperatureContainerDiv, feelsLikeContainer, humidityContainer, windContainer, precipitationContainer]
 
-    return values
+    return valueContainers
 }
 
+async function buildCurrentDiv() {
+    currentGrid.replaceChildren()
+    const weatherData = await getWeatherData()
+
+    createCurrentDiv(weatherData.current, 'Baku').forEach(container => currentGrid.appendChild((container)))
+
+}
 
 searchButton.addEventListener('click', () => getGeoData().then(result => console.log(result)))
 searchButton.addEventListener('click', () => getWeatherData().then(result => console.log(result)))
 searchButton.addEventListener('click', () => buildDailyDiv())
 searchButton.addEventListener('click', () => buildHourlyDiv())
+searchButton.addEventListener('click', () => buildCurrentDiv())
 searchButton.addEventListener('click', () => setHourlyTemps('Sun').then(result => console.log(result)))
 
 
