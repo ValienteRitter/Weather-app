@@ -120,7 +120,7 @@ function setSpeedUnit(e) {
 function setPrecipitationUnit(e) {
     precipitationUnitButtons.forEach(child => child.classList.remove('active'))
     e.target.classList.add('active')
-    tempUnit = e.target.dataset.unit
+    precipitationUnit = e.target.dataset.unit
 }
 
 async function setHourlyTemps(weekDay) {
