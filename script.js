@@ -6,6 +6,10 @@ const hourlyGrid = document.querySelector('.hourly-grid')
 const unitButton = document.querySelector('.unit-button');
 const unitDropdown = document.querySelector('.unit-dropdown');
 
+const mainSection = document.querySelector('main');
+const errorStateSection = document.querySelector('.error-state');
+const retryButton = document.querySelector('.retry-button');
+
 const tempUnitGroup = document.querySelector('.temp-unit');
 const speedUnitGroup = document.querySelector('.speed-unit');
 const precipitionUnitGroup = document.querySelector('.precipitation-unit');
@@ -28,6 +32,7 @@ async function getGeoData() {
 
 
     } catch (error) {
+        setErrorState()
         throw new Error('Error happened when getting geo data')
     }
 }
@@ -41,6 +46,7 @@ async function getWeatherData() {
             const weatherData = await response.json()
             return weatherData
         } catch (error) {
+            setErrorState()
             throw new Error('Error happened when getting weather data')
     }
 }
@@ -105,6 +111,20 @@ function getHoursOfWeekday(dates) {
         
     })
     return dateMap
+}
+
+function setErrorState() {
+    mainSection.classList.add('hidden')
+    errorStateSection.classList.remove('hidden')
+}
+
+function retry() {
+    buildCurrentDiv()
+    buildDailyDiv()
+    buildHourlyDiv()
+
+    mainSection.classList.remove('hidden')
+    errorStateSection.classList.add('hidden')
 }
 
 function setTempUnit(e) {
@@ -251,3 +271,5 @@ unitButton.addEventListener('click', () => unitDropdown.classList.toggle('hidden
 tempUnitButtons.forEach(button => button.addEventListener('click', setTempUnit))
 speedUnitButtons.forEach(button => button.addEventListener('click', setSpeedUnit))
 precipitationUnitButtons.forEach(button => button.addEventListener('click', setPrecipitationUnit))
+
+retryButton.addEventListener('click', retry)
