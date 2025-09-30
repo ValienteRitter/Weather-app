@@ -3,6 +3,20 @@ const userLocationInput = document.querySelector('input')
 const currentGrid = document.querySelector('.current-grid')
 const dailyGrid = document.querySelector('.daily-grid')
 const hourlyGrid = document.querySelector('.hourly-grid')
+const unitButton = document.querySelector('.unit-button');
+const unitDropdown = document.querySelector('.unit-dropdown');
+
+const tempUnitGroup = document.querySelector('.temp-unit');
+const speedUnitGroup = document.querySelector('.speed-unit');
+const precipitionUnitGroup = document.querySelector('.precipitation-unit');
+
+let tempUnit = 'celcius'
+let speedUnit = 'km/h'
+let precipitationUnit = 'mm'
+
+const tempUnitButtons = tempUnitGroup.querySelectorAll('button')
+const speedUnitButtons = speedUnitGroup.querySelectorAll('button')
+const precipitationUnitButtons =  precipitionUnitGroup.querySelectorAll('button')
 
 async function getGeoData() {
     const userLocation =userLocationInput.value
@@ -91,6 +105,22 @@ function getHoursOfWeekday(dates) {
         
     })
     return dateMap
+}
+
+function setTempUnit(e) {
+    tempUnitButtons.forEach(child => child.classList.remove('active'))
+    e.target.classList.add('active')
+    tempUnit = e.target.dataset.unit
+}
+function setSpeedUnit(e) {
+    speedUnitButtons.forEach(child => child.classList.remove('active'))
+    e.target.classList.add('active')
+    speedUnit = e.target.dataset.unit
+}
+function setPrecipitationUnit(e) {
+    precipitationUnitButtons.forEach(child => child.classList.remove('active'))
+    e.target.classList.add('active')
+    tempUnit = e.target.dataset.unit
 }
 
 async function setHourlyTemps(weekDay) {
@@ -216,4 +246,8 @@ searchButton.addEventListener('click', () => buildHourlyDiv())
 searchButton.addEventListener('click', () => buildCurrentDiv())
 searchButton.addEventListener('click', () => setHourlyTemps('Sun').then(result => console.log(result)))
 
+unitButton.addEventListener('click', () => unitDropdown.classList.toggle('hidden'))
 
+tempUnitButtons.forEach(button => button.addEventListener('click', setTempUnit))
+speedUnitButtons.forEach(button => button.addEventListener('click', setSpeedUnit))
+precipitationUnitButtons.forEach(button => button.addEventListener('click', setPrecipitationUnit))
