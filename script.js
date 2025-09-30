@@ -169,7 +169,7 @@ async function buildHourlyDiv() {
     })
 }
 
-function createCurrentDiv({temperature_2m, time, apparent_temperature, relative_humidity_2m, wind_speed_10m, precipitation}, location) {
+function createCurrentDiv({temperature_2m, time, apparent_temperature, relative_humidity_2m, wind_speed_10m, precipitation}, location, {precipitation: precipitationUnit, wind_speed_10m: windSpeedUnit}) {
     const temperatureContainerDiv = document.createElement('div');
     const temperatureValueDiv = document.createElement('div');
     const locationDateDiv = document.createElement('div');
@@ -218,8 +218,8 @@ function createCurrentDiv({temperature_2m, time, apparent_temperature, relative_
 
     feelsLikeP.textContent = apparent_temperature.toFixed(0) + '\u00B0'
     humidityP.textContent = relative_humidity_2m.toFixed(0) + '%'
-    windP.textContent = wind_speed_10m
-    precipitationP.textContent = precipitation
+    windP.textContent = wind_speed_10m.toFixed(0) + ' ' + windSpeedUnit
+    precipitationP.textContent = precipitation.toFixed() + ' ' + precipitationUnit
 
     feelsLikeContainer.appendChild(feelsLikeP)
     humidityContainer.appendChild(humidityP)
@@ -235,7 +235,7 @@ async function buildCurrentDiv() {
     currentGrid.replaceChildren()
     const weatherData = await getWeatherData()
 
-    createCurrentDiv(weatherData.current, 'Baku').forEach(container => currentGrid.appendChild((container)))
+    createCurrentDiv(weatherData.current, 'Baku', weatherData.current_units).forEach(container => currentGrid.appendChild((container)))
 
 }
 
