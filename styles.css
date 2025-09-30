@@ -299,3 +299,16 @@ main {
 .active {
 background-color: var(--Neutral-700) !important;
 }
+
+.error-state {
+    text-align: center;
+}
+
+.error-state > button {
+    background-color: var(--Neutral-700);
+    color: var(--Neutral-0);
+    padding: 0.5rem;
+    width: 6rem;
+    border-radius: 15px;
+    border: none;
+}
