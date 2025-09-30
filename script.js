@@ -10,8 +10,8 @@ const tempUnitGroup = document.querySelector('.temp-unit');
 const speedUnitGroup = document.querySelector('.speed-unit');
 const precipitionUnitGroup = document.querySelector('.precipitation-unit');
 
-let tempUnit = 'celcius'
-let speedUnit = 'km/h'
+let tempUnit = 'celsius'
+let speedUnit = 'kmh'
 let precipitationUnit = 'mm'
 
 const tempUnitButtons = tempUnitGroup.querySelectorAll('button')
@@ -36,7 +36,7 @@ async function getWeatherData() {
             const data = await getGeoData()
             const latitude = data.results[0].latitude
             const longitude = data.results[0].longitude
-            const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,rain_sum,weather_code&hourly=temperature_2m,weather_code&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,precipitation,weather_code,rain,wind_gusts_10m&timezone=auto`
+            const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,rain_sum,weather_code&hourly=temperature_2m,weather_code&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,precipitation,weather_code,rain,wind_gusts_10m&timezone=auto&windspeed_unit=${speedUnit}&temperature_unit=${tempUnit}&precipitation_unit=${precipitationUnit}`
             const response = await fetch(weatherUrl)
             const weatherData = await response.json()
             return weatherData
