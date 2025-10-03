@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
         <div class="app-container">
@@ -16,15 +16,17 @@
                         <div class="group temp-unit">
                             <div class="label">Temperature</div>
                             <button data-unit="celsius">Celsius(&deg;C)</button>
-                            <button data-unit="fahrenheit">Fahrenheit(&deg;F)</button>
+                            <button data-unit="fahrenheit">
+                                Fahrenheit(&deg;F)
+                            </button>
                         </div>
-                        <hr>
+                        <hr />
                         <div class="group speed-unit">
                             <div class="label">Wind Speed</div>
                             <button data-unit="kmh">km/h</button>
                             <button data-unit="mph">mph</button>
                         </div>
-                        <hr>
+                        <hr />
                         <div class="group precipitation-unit">
                             <div class="label">Precitipation</div>
                             <button data-unit="mm">Millimeters (mm)</button>
@@ -35,7 +37,10 @@
             </header>
             <section class="error-state hidden">
                 <h1>Something went wrong</h1>
-                <p>We couldn't connect to the server. Please try again in a few moments</p>
+                <p>
+                    We couldn't connect to the server. Please try again in a few
+                    moments
+                </p>
                 <button class="retry-button">Retry</button>
             </section>
             <main class="">
