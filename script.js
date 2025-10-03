@@ -180,8 +180,11 @@ function createHourlyDiv(hour, temp) {
 
 async function buildHourlyDiv() {
     hourlyGrid.replaceChildren()
-
-    const hourMap = await setHourlyTemps('Sun')
+    const currentDay = new Date()
+    const dayOfWeek = currentDay.toLocaleDateString('en-US', {
+        weekday: 'long'
+    })
+    const hourMap = await setHourlyTemps(dayOfWeek.slice(0, 3))
 
     hourMap.forEach((temp, hour) => {
         const hourlyDiv = createHourlyDiv(hour, temp)
